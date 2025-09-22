@@ -1,4 +1,4 @@
-package com.salt.boilerplate.api.features.admin.contoller;
+package com.salt.boilerplate.api.features.admin.controller;
 
 import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminRegistrationRequest;
@@ -22,7 +22,7 @@ public class CreateAdminController {
     }
 
     @PostMapping("/admins")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public GeneralResponse<AdminResponse> createAdmin(@Valid @RequestBody AdminRegistrationRequest request) {
         return new GeneralResponse<>("Success", new AdminResponse(createAdminUseCase.execute(request)));
     }

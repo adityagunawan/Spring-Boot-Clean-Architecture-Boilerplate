@@ -52,7 +52,7 @@ class CreateAdminUseCaseTest {
         assertThat(passed.getPassword().value()).isEqualTo("S3cr3t!");
         assertThat(passed.getName().value()).isEqualTo("Alice");
         assertThat(passed.getEmail().value()).isEqualTo("alice@example.com");
-        assertThat(passed.getRole()).isEqualTo("ROLE_ADMIN");
+        assertThat(passed.getRole().name()).isEqualTo("ADMIN");
 
         assertThat(result).isSameAs(created);
     }

@@ -1,4 +1,4 @@
-package com.salt.boilerplate.api.features.admin.contoller;
+package com.salt.boilerplate.api.features.admin.controller;
 
 import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;

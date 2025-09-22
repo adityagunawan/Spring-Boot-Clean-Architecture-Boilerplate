@@ -4,6 +4,7 @@ import com.salt.boilerplate.domain.admin.gateway.AdminGateway;
 import com.salt.boilerplate.domain.admin.model.Admin;
 import com.salt.boilerplate.infrastructure.db.repository.UserRepository;
 import com.salt.boilerplate.infrastructure.db.schema.UserSchema;
+import com.salt.boilerplate.domain.common.valueobject.Role;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class AdminPersistenceGateway implements AdminGateway {
     @Override
     public Optional<Admin> findById(Long id) {
         return userRepository
-                .findByIdAndRole(id, "ROLE_ADMIN")
+                .findByIdAndRole(id, Role.ADMIN)
                 .map(UserSchema::toAdmin);
     }
 
@@ -43,7 +44,7 @@ public class AdminPersistenceGateway implements AdminGateway {
         return userRepository
                 .findAll()
                 .stream()
-                .filter(user -> "ROLE_ADMIN".equals(user.getRole()))
+                .filter(user -> Role.ADMIN.equals(user.getRole()))
                 .map(UserSchema::toAdmin)
                 .toList();
     }

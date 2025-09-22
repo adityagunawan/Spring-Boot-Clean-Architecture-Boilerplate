@@ -5,6 +5,7 @@ import com.salt.boilerplate.domain.admin.value_object.PasswordHash;
 import com.salt.boilerplate.domain.admin.value_object.PersonName;
 import com.salt.boilerplate.domain.admin.value_object.Username;
 import com.salt.boilerplate.domain.common.exception.DomainException;
+import com.salt.boilerplate.domain.common.valueobject.Role;
 
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Admin {
     private final Email email;
     private final PersonName name;
     private final PasswordHash password;
-    private final String role;        // fixed to ROLE_ADMIN in your example
+    private final Role role;        // fixed to ADMIN role
 
     public Admin(Long id,
                  Username username,
@@ -31,7 +32,7 @@ public class Admin {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.role = "ROLE_ADMIN";
+        this.role = Role.ADMIN;
     }
 
     // factories for creation without id
@@ -45,7 +46,7 @@ public class Admin {
     public Email getEmail() { return email; }
     public PersonName getName() { return name; }
     public PasswordHash getPassword() { return password; }
-    public String getRole() { return role; }
+    public Role getRole() { return role; }
 
 
 

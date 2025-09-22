@@ -1,5 +1,6 @@
 package com.salt.boilerplate.infrastructure.db.repository;
 
+import com.salt.boilerplate.domain.common.valueobject.Role;
 import com.salt.boilerplate.infrastructure.db.schema.UserSchema;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,5 +16,5 @@ public interface UserRepository extends JpaRepository<UserSchema, Long> {
 
   Collection<UserSchema> findAllByUsername(String username);
 
-  Optional<UserSchema> findByIdAndRole(Long id, String role);
+  Optional<UserSchema> findByIdAndRole(Long id, Role role);
 }

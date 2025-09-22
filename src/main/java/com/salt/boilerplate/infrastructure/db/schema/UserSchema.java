@@ -5,6 +5,7 @@ import com.salt.boilerplate.domain.admin.value_object.Email;
 import com.salt.boilerplate.domain.admin.value_object.PasswordHash;
 import com.salt.boilerplate.domain.admin.value_object.PersonName;
 import com.salt.boilerplate.domain.admin.value_object.Username;
+import com.salt.boilerplate.domain.common.valueobject.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -28,9 +29,9 @@ public class UserSchema extends AbstractEntitySchema<Long> {
     @Column(nullable = false, length = 60)
     private String name;
 
-    @NotBlank
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    protected String role;
+    protected Role role;
 
     @Column(nullable = false)
     private boolean enabled;
@@ -92,11 +93,11 @@ public class UserSchema extends AbstractEntitySchema<Long> {
         this.name = name;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
