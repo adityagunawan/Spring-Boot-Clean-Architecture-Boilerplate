@@ -1,5 +1,6 @@
 package com.salt.boilerplate.api.features.admin.contoller;
 
+import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.domain.admin.exception.AdminNotFoundException;
 import com.salt.boilerplate.domain.admin.model.Admin;
@@ -20,9 +21,7 @@ public class GetAdminController {
 
     @GetMapping("/admins/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public AdminResponse getAdmin(@PathVariable Long id) throws AdminNotFoundException {
-        Admin admin = getAdminUseCase.execute(id);
-
-        return new AdminResponse(admin);
+    public GeneralResponse<AdminResponse> getAdmin(@PathVariable Long id) throws AdminNotFoundException {
+        return new GeneralResponse<>("Success", new AdminResponse(getAdminUseCase.execute(id)));
     }
 }

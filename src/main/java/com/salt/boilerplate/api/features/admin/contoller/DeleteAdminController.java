@@ -1,5 +1,6 @@
 package com.salt.boilerplate.api.features.admin.contoller;
 
+import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.domain.admin.exception.AdminNotFoundException;
 import com.salt.boilerplate.usecase.admin.DeleteAdminUseCase;
@@ -19,8 +20,8 @@ public class DeleteAdminController {
 
     @DeleteMapping("/admins/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AdminResponse deleteAdmin(@PathVariable Long id) throws AdminNotFoundException {
-        return new AdminResponse(deleteAdminUserCase.execute(id));
+    public GeneralResponse<AdminResponse> deleteAdmin(@PathVariable Long id) throws AdminNotFoundException {
+        return new GeneralResponse<>("Success", new AdminResponse(deleteAdminUserCase.execute(id)));
     }
 
 }

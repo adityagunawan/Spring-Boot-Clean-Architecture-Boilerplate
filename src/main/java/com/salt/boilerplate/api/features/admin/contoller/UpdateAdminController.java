@@ -1,5 +1,6 @@
 package com.salt.boilerplate.api.features.admin.contoller;
 
+import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminUpdateRequest;
 import com.salt.boilerplate.domain.admin.exception.AdminNotFoundException;
@@ -18,7 +19,7 @@ public class UpdateAdminController {
 
     @PutMapping("/admins/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AdminResponse updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminUpdateRequest data) throws AdminNotFoundException {
-        return new AdminResponse(updateAdminUseCase.execute(id, data));
+    public GeneralResponse<AdminResponse> updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminUpdateRequest data) throws AdminNotFoundException {
+        return new GeneralResponse<>("Success", new AdminResponse(updateAdminUseCase.execute(id, data)));
     }
 }

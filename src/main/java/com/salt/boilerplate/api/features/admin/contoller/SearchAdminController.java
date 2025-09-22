@@ -1,5 +1,6 @@
 package com.salt.boilerplate.api.features.admin.contoller;
 
+import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.domain.admin.model.Admin;
 import com.salt.boilerplate.usecase.admin.SearchAdminUseCase;
@@ -20,10 +21,10 @@ public class SearchAdminController {
 
     @GetMapping("/admins")
     @ResponseStatus(HttpStatus.OK)
-    public List<AdminResponse> searchAdmin() {
+    public GeneralResponse<List<AdminResponse>> searchAdmin() {
         List<Admin> admins = this.searchAdminUseCase.execute();
 
-        return admins.stream().map(AdminResponse::new).toList();
+        return new GeneralResponse<>("Success", admins.stream().map(AdminResponse::new).toList());
     }
 
 }

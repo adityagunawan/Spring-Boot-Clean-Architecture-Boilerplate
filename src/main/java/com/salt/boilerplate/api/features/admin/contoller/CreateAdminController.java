@@ -1,6 +1,5 @@
 package com.salt.boilerplate.api.features.admin.contoller;
 
-import com.salt.boilerplate.api.config.ApiException;
 import com.salt.boilerplate.api.config.dto.GeneralResponse;
 import com.salt.boilerplate.api.features.admin.dto.AdminRegistrationRequest;
 import com.salt.boilerplate.api.features.admin.dto.AdminResponse;

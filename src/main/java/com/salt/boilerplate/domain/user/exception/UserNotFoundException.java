@@ -1,6 +1,8 @@
 package com.salt.boilerplate.domain.user.exception;
 
-public class UserNotFoundException  extends Exception {
+import com.salt.boilerplate.domain.common.exception.NotFoundException;
+
+public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException() {
         super("User Not Found!!");
     }

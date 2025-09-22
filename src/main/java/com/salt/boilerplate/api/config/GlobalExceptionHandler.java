@@ -1,6 +1,8 @@
 package com.salt.boilerplate.api.config;
 
 import com.salt.boilerplate.api.config.dto.GeneralResponse;
+import com.salt.boilerplate.domain.common.exception.DomainException;
+import com.salt.boilerplate.domain.common.exception.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Builder;
 import lombok.Data;
@@ -27,10 +29,22 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ApiException.class})
-    public ResponseEntity<GeneralResponse> generalException(ApiException ex, HttpServletRequest request) {
+    @ExceptionHandler({DomainException.class})
+    public ResponseEntity<GeneralResponse> domainException(DomainException ex, HttpServletRequest request) {
         log.error(ex.getMessage(), ex);
-        return new ResponseEntity<>(new GeneralResponse(false, ex.getMessage(), null), ex.getHttpStatus());
+        return new ResponseEntity<>(new GeneralResponse(false, ex.getMessage(), null), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<GeneralResponse> notFoundExceptions(NotFoundException ex, HttpServletRequest request) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(new GeneralResponse(false, ex.getMessage(), null), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<GeneralResponse> unhandledExceptions(Exception ex, HttpServletRequest request) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(new GeneralResponse(false, "Internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @SneakyThrows
