@@ -1,4 +1,4 @@
-package com.salt.boilerplate.domain;
+package com.salt.boilerplate.domain.common.abstracts;
 
 import java.io.Serializable;
 

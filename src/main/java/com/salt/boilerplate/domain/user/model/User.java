@@ -1,6 +1,6 @@
 package com.salt.boilerplate.domain.user.model;
 
-import com.salt.boilerplate.domain.AbstractDomain;
+import com.salt.boilerplate.domain.common.abstracts.AbstractDomain;
 
 public class User extends AbstractDomain<Long> {
 
