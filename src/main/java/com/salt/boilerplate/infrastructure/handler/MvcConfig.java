@@ -1,4 +1,4 @@
-package com.salt.boilerplate.infrastructure.web;
+package com.salt.boilerplate.infrastructure.handler;
 
 import com.salt.boilerplate.domain.admin.gateway.AdminGateway;
 import com.salt.boilerplate.infrastructure.db.repository.UserRepository;

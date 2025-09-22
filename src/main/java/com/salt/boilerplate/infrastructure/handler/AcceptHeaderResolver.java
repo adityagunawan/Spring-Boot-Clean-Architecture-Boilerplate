@@ -1,4 +1,4 @@
-package com.salt.boilerplate.infrastructure.web;
+package com.salt.boilerplate.infrastructure.handler;
 
 
 import jakarta.servlet.http.HttpServletRequest;
