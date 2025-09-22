@@ -1,11 +1,10 @@
-package com.salt.boilerplate.api.admin.dto;
+package com.salt.boilerplate.api.features.admin.dto;
 
-
-import com.salt.boilerplate.usecase.admin.dto.IAdminUpdateData;
+import com.salt.boilerplate.usecase.admin.dto.IAdminRegistrationData;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record AdminUpdateRequest(
+public record AdminRegistrationRequest(
         @NotBlank
         String username,
 
@@ -17,5 +16,6 @@ public record AdminUpdateRequest(
 
         @NotBlank
         @Email
-        String email) implements IAdminUpdateData {
+        String email
+) implements IAdminRegistrationData{
 }

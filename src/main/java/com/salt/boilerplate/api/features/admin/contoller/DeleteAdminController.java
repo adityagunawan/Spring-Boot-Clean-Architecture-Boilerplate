@@ -1,6 +1,6 @@
-package com.salt.boilerplate.api.admin.contoller;
+package com.salt.boilerplate.api.features.admin.contoller;
 
-import com.salt.boilerplate.api.admin.dto.AdminResponse;
+import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.domain.admin.exception.AdminNotFoundException;
 import com.salt.boilerplate.usecase.admin.DeleteAdminUseCase;
 import org.springframework.http.HttpStatus;

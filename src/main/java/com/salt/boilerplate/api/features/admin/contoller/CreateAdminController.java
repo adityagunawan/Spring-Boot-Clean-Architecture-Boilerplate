@@ -1,7 +1,9 @@
-package com.salt.boilerplate.api.admin.contoller;
+package com.salt.boilerplate.api.features.admin.contoller;
 
-import com.salt.boilerplate.api.admin.dto.AdminRegistrationRequest;
-import com.salt.boilerplate.api.admin.dto.AdminResponse;
+import com.salt.boilerplate.api.config.ApiException;
+import com.salt.boilerplate.api.config.dto.GeneralResponse;
+import com.salt.boilerplate.api.features.admin.dto.AdminRegistrationRequest;
+import com.salt.boilerplate.api.features.admin.dto.AdminResponse;
 import com.salt.boilerplate.usecase.admin.CreateAdminUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,8 @@ public class CreateAdminController {
 
     @PostMapping("/admins")
     @ResponseStatus(HttpStatus.CREATED)
-    public AdminResponse createAdmin(@Valid @RequestBody AdminRegistrationRequest request) {
-        return new AdminResponse(createAdminUseCase.execute(request));
+    public GeneralResponse<AdminResponse> createAdmin(@Valid @RequestBody AdminRegistrationRequest request) {
+        return new GeneralResponse<>("Success", new AdminResponse(createAdminUseCase.execute(request)));
     }
 
 }

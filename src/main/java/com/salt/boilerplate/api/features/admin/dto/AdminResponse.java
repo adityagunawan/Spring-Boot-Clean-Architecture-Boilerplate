@@ -1,4 +1,4 @@
-package com.salt.boilerplate.api.admin.dto;
+package com.salt.boilerplate.api.features.admin.dto;
 
 import com.salt.boilerplate.domain.admin.model.Admin;
 import com.salt.boilerplate.usecase.admin.dto.IAdminPublicData;
