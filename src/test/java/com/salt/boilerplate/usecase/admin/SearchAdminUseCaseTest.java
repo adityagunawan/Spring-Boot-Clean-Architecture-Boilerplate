@@ -28,8 +28,18 @@ class SearchAdminUseCaseTest {
 
     @Test
     void execute_returnsAllFromGateway() {
-        Admin a1 = new Admin("u1", "p1", "n1", "e1@example.com");
-        Admin a2 = new Admin("u2", "p2", "n2", "e2@example.com");
+        Admin a1 = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("userone"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("e1@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Name One"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("p1")
+        );
+        Admin a2 = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("usertwo"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("e2@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Name Two"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("p2")
+        );
         when(adminGateway.findAll()).thenReturn(List.of(a1, a2));
 
         List<Admin> result = useCase.execute();
@@ -38,4 +48,3 @@ class SearchAdminUseCaseTest {
         verify(adminGateway).findAll();
     }
 }
-

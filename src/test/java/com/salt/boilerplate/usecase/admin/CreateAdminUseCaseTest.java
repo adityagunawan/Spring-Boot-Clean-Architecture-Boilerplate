@@ -34,7 +34,12 @@ class CreateAdminUseCaseTest {
         when(data.name()).thenReturn("Alice");
         when(data.email()).thenReturn("alice@example.com");
 
-        Admin created = new Admin("alice", "S3cr3t!", "Alice", "alice@example.com");
+        Admin created = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("alice"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("alice@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Alice"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("S3cr3t!")
+        );
         when(adminGateway.create(any(Admin.class))).thenReturn(created);
 
         Admin result = useCase.execute(data);
@@ -43,13 +48,12 @@ class CreateAdminUseCaseTest {
         verify(adminGateway).create(captor.capture());
         Admin passed = captor.getValue();
 
-        assertThat(passed.getUsername()).isEqualTo("alice");
-        assertThat(passed.getPassword()).isEqualTo("S3cr3t!");
-        assertThat(passed.getName()).isEqualTo("Alice");
-        assertThat(passed.getEmail()).isEqualTo("alice@example.com");
+        assertThat(passed.getUsername().value()).isEqualTo("alice");
+        assertThat(passed.getPassword().value()).isEqualTo("S3cr3t!");
+        assertThat(passed.getName().value()).isEqualTo("Alice");
+        assertThat(passed.getEmail().value()).isEqualTo("alice@example.com");
         assertThat(passed.getRole()).isEqualTo("ROLE_ADMIN");
 
         assertThat(result).isSameAs(created);
     }
 }
-

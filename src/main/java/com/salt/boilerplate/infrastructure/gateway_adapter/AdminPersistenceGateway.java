@@ -8,11 +8,11 @@ import com.salt.boilerplate.infrastructure.db.schema.UserSchema;
 import java.util.List;
 import java.util.Optional;
 
-public class AdminPersistentGateway implements AdminGateway {
+public class AdminPersistenceGateway implements AdminGateway {
 
     private final UserRepository userRepository;
 
-    public AdminPersistentGateway(UserRepository userRepository) {
+    public AdminPersistenceGateway(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

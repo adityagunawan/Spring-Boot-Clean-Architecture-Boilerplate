@@ -31,7 +31,12 @@ class GetAdminUseCaseTest {
     @Test
     void execute_whenFound_returnsAdmin() throws Exception {
         Long id = 1L;
-        Admin admin = new Admin("carol", "pwd", "Carol", "carol@example.com");
+        Admin admin = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("carol"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("carol@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Carol"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("pwd")
+        );
         when(adminGateway.findById(id)).thenReturn(Optional.of(admin));
 
         Admin result = useCase.execute(id);
@@ -49,4 +54,3 @@ class GetAdminUseCaseTest {
         verify(adminGateway).findById(id);
     }
 }
-

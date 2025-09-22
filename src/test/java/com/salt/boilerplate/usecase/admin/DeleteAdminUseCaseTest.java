@@ -31,7 +31,12 @@ class DeleteAdminUseCaseTest {
     @Test
     void execute_whenAdminExists_deletesAndReturnsAdmin() throws Exception {
         Long id = 10L;
-        Admin admin = new Admin("bob", "p@ss", "Bob", "bob@example.com");
+        Admin admin = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("bob"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("bob@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Bob"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("p@ss")
+        );
         when(adminGateway.findById(id)).thenReturn(Optional.of(admin));
 
         Admin result = useCase.execute(id);
@@ -54,4 +59,3 @@ class DeleteAdminUseCaseTest {
         verify(adminGateway, never()).delete(anyLong());
     }
 }
-

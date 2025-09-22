@@ -31,18 +31,28 @@ class UpdateAdminUseCaseTest {
     }
 
     @Test
-    void execute_updatesOnlyNonBlankFields_andReturnsUpdated() throws Exception {
+    void execute_updatesAllFields_andReturnsUpdated() throws Exception {
         Long id = 3L;
-        Admin existing = new Admin("oldUser", "oldPass", "Old Name", "old@example.com");
+        Admin existing = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("oldUser"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("old@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("Old Name"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("oldPass")
+        );
         when(adminGateway.findById(id)).thenReturn(Optional.of(existing));
 
         IAdminUpdateData data = mock(IAdminUpdateData.class);
         when(data.username()).thenReturn("newUser");
-        when(data.password()).thenReturn(""); // blank should be ignored
+        when(data.password()).thenReturn("newPass");
         when(data.name()).thenReturn("New Name");
-        when(data.email()).thenReturn(null); // null should be ignored
+        when(data.email()).thenReturn("old@example.com");
 
-        Admin updatedReturn = new Admin("newUser", "oldPass", "New Name", "old@example.com");
+        Admin updatedReturn = Admin.createNew(
+                new com.salt.boilerplate.domain.admin.value_object.Username("newUser"),
+                new com.salt.boilerplate.domain.admin.value_object.Email("old@example.com"),
+                new com.salt.boilerplate.domain.admin.value_object.PersonName("New Name"),
+                new com.salt.boilerplate.domain.admin.value_object.PasswordHash("newPass")
+        );
         when(adminGateway.update(any(Admin.class))).thenReturn(updatedReturn);
 
         Admin result = useCase.execute(id, data);
@@ -51,10 +61,10 @@ class UpdateAdminUseCaseTest {
         verify(adminGateway).update(captor.capture());
         Admin passed = captor.getValue();
 
-        assertThat(passed.getUsername()).isEqualTo("newUser");
-        assertThat(passed.getPassword()).isEqualTo("oldPass");
-        assertThat(passed.getName()).isEqualTo("New Name");
-        assertThat(passed.getEmail()).isEqualTo("old@example.com");
+        assertThat(passed.getUsername().value()).isEqualTo("newUser");
+        assertThat(passed.getPassword().value()).isEqualTo("newPass");
+        assertThat(passed.getName().value()).isEqualTo("New Name");
+        assertThat(passed.getEmail().value()).isEqualTo("old@example.com");
 
         assertThat(result).isSameAs(updatedReturn);
     }
@@ -73,4 +83,3 @@ class UpdateAdminUseCaseTest {
         verify(adminGateway, never()).update(any());
     }
 }
-

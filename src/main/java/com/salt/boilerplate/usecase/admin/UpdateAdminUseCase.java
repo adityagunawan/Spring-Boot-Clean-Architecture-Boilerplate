@@ -3,6 +3,10 @@ package com.salt.boilerplate.usecase.admin;
 import com.salt.boilerplate.domain.admin.exception.AdminNotFoundException;
 import com.salt.boilerplate.domain.admin.gateway.AdminGateway;
 import com.salt.boilerplate.domain.admin.model.Admin;
+import com.salt.boilerplate.domain.admin.value_object.Email;
+import com.salt.boilerplate.domain.admin.value_object.PasswordHash;
+import com.salt.boilerplate.domain.admin.value_object.PersonName;
+import com.salt.boilerplate.domain.admin.value_object.Username;
 import com.salt.boilerplate.usecase.admin.dto.IAdminUpdateData;
 
 public class UpdateAdminUseCase {
@@ -16,17 +20,7 @@ public class UpdateAdminUseCase {
         Admin customer = this.adminGateway.findById(id)
                 .orElseThrow(AdminNotFoundException::new);
 
-        if(data.username() != null && !data.username().isBlank())
-            customer.setUsername(data.username());
-
-        if(data.password() != null && !data.password().isBlank())
-            customer.setPassword(data.password());
-
-        if(data.name() != null && !data.name().isBlank())
-            customer.setName(data.name());
-
-        if(data.email() != null && !data.email().isBlank())
-            customer.setEmail(data.email());
+        customer = new Admin(customer.getId(), new Username(data.username()), new Email(data.email()), new PersonName(data.name()), new PasswordHash(data.password()));
 
         return this.adminGateway.update(customer);
     }

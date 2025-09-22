@@ -7,9 +7,9 @@ public record AdminResponse(String id, String username, String name, String emai
     public AdminResponse(Admin admin) {
         this(
                 admin.getId().toString(),
-                admin.getUsername(),
-                admin.getName(),
-                admin.getEmail()
+                admin.getUsername().value(),
+                admin.getName().value(),
+                admin.getEmail().value()
         );
     }
 }
